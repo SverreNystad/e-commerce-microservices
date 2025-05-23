@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: native
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        native:
+          # The search locations can be remote stores
+          search-locations: classpath:/configurations
+
+server:
+  port: 8888
