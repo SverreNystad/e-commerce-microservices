@@ -1,0 +1,100 @@
+
+@startuml
+package "Customer Domain" {
+    entity "Customer" as customer {
+        id : int
+        firstname: string
+        lastname: string
+        email : string
+    }
+
+    entity "Address" as address {
+        id : int
+        street: string
+        city: string
+        zipCode: string
+    }
+
+    customer -- address : "has"
+    
+}
+package "Order Domain" {
+    entity "Order" as order {
+        id : int
+        reference: string
+        paymentMethod: string
+        customerId: string
+        orderLines: orderLine[]
+        createdDate: DateTime
+        lastModifiedDate: DateTime
+    }
+
+    entity "OrderLine" as orderLine {
+        id : int
+        orderId: string
+        productId: string
+        quantity: double
+    }
+    ' One to many relationship
+    order -- orderLine : "contains"
+    customer -- order : "places"
+
+}
+
+package "Product Domain" {
+    entity "Product" as product {
+        id : int
+        name: string
+        description: string
+        availableQuantity: int
+        price: BigDecimal
+        categoryId: int
+    }
+
+    entity "Category" as category {
+        id : int
+        name: string
+        description: string
+    }
+    ' many to one relationship
+    product -- category : "belongs to"
+    ' One to many relationship
+    orderLine -- product : "contains"
+    
+}
+
+
+package "Payment Domain" {
+    entity "Payment" as payment {
+        id : int
+        orderId: string
+        amount: BigDecimal
+        paymentDate: DateTime
+        status: string
+    }
+}
+
+package "Notification Domain" {
+    entity "Notification" as notification {
+        id : int
+        sender
+        recepient
+        content
+        date: DateTime
+    }
+    ' One to one relationship
+    order -- notification : "has"
+    
+}
+
+package "Payment Domain" {
+    entity "Payment" as payment {
+        id : int
+        reference: string
+        amount: BigDecimal
+    }
+    ' One to one relationship
+    order -- payment : "has"
+    
+}
+@enduml
