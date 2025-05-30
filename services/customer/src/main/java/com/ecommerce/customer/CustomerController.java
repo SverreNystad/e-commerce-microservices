@@ -45,9 +45,9 @@ public class CustomerController {
         return ResponseEntity.ok(customers);
     }
 
-    @GetMapping("/exists/{custommer-id}")
+    @GetMapping("/exists/{customer-id}")
     public ResponseEntity<Boolean> customerExists(
-        @PathVariable("custommer-id") String customerId
+        @PathVariable("customer-id") String customerId
     ) {
         boolean exists = service.existsById(customerId);
         return ResponseEntity.ok(exists);
