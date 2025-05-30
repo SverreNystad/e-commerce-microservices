@@ -20,6 +20,9 @@ This project utilizes a variety of technologies to create a robust microservices
 * **Service Mesh:** Spring Cloud Netflix Eureka (discovery), Spring Cloud Gateway (API gateway)
 * **Configuration Management:** Spring Cloud Config Server, to manage application properties across services
 * **Security:** Keycloak for authentication and authorization
+* **API Documentation:** OpenAPI (Swagger) for API documentation
+* **Build Tool:** Gradle <3 for dependency management and build automation
+
 
 **Datastores**
 I used Hibernate for ORM with JPA, and both PostgreSQL and MongoDB as data stores. 
@@ -59,6 +62,17 @@ docker compose up --build -d
 ```
 
 ## Testing
+
+Each service has its own set of unit and integration tests. You can run the tests using Gradle:
+
+```bash
+./gradlew test
+```
+
+## Documentation
+
+[Developer Setup](docs/manuals/developer-setup.md)
+[Terraform (IaC)](docs/manuals/infrastructure_as_code.md)
 
 
 ## Acknowledgements
