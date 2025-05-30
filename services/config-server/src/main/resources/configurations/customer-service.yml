@@ -9,8 +9,5 @@ spring:
         database: customer
         authentication-database: admin
 
-  application:
-    name: customer-service
-  
 server:
   port: 8090
