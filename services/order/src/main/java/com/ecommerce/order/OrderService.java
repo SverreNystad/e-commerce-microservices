@@ -12,6 +12,8 @@ import com.ecommerce.kafka.OrderConfirmation;
 import com.ecommerce.kafka.OrderProducer;
 import com.ecommerce.orderline.OrderLineRequest;
 import com.ecommerce.orderline.OrderLineService;
+import com.ecommerce.payment.PaymentClient;
+import com.ecommerce.payment.PaymentRequest;
 import com.ecommerce.product.ProductClient;
 import com.ecommerce.product.PurchaseDTO;
 import com.ecommerce.product.PurchaseRequest;
@@ -26,6 +28,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final CustomerClient customerClient;
     private final ProductClient productClient;
+    private final PaymentClient paymentClient;
     private final OrderMapper mapper;
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
@@ -56,7 +59,14 @@ public class OrderService {
         }
 
         // Start payment process
-        // TODO: Implement payment processing logic here
+        PaymentRequest paymentRequest = new PaymentRequest(
+            request.paymentMethod(),
+            request.amount(),
+            savedOrder.getId(),
+            request.reference(),
+            customer
+        );
+        paymentClient.requestOrderPayment(paymentRequest);
         
         // Notify the customer --> notification service (kafka)
         orderProducer.sendOrderConfirmation(
