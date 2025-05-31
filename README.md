@@ -71,8 +71,8 @@ Each service has its own set of unit and integration tests. You can run the test
 
 ## Documentation
 
-[Developer Setup](docs/manuals/developer-setup.md)
-[Terraform (IaC)](docs/manuals/infrastructure_as_code.md)
+- [Developer Setup](docs/manuals/developer-setup.md)
+- [Terraform (IaC)](docs/manuals/infrastructure_as_code.md)
 
 
 ## Acknowledgements
